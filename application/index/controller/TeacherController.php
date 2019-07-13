@@ -7,6 +7,8 @@ class TeacherController
     public function index()
     {
         $Teacher = new Teacher;
-        var_dump($Teacher);
+        $teachers = $Teacher->select();
+        $teacher = $teachers[0];
+        var_dump($teacher->getData());
     }
 }
