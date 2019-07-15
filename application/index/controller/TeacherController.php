@@ -33,7 +33,7 @@ class TeacherController extends Controller
         $Teacher->username = $postData['username'];
         $Teacher->sex = $postData['sex'];
         $Teacher->email = $postData['email'];
-
+        $Teacher->create_time = date('Y-m-d H:i:s', time());
         $Teacher->save();
         //执行对象的插入数据操作
         // var_dump($Teacher->save());
