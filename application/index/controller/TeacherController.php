@@ -22,20 +22,21 @@ class TeacherController extends Controller
 
     public function insert()
     {
+        //接收传入数据
         $postData = Request::instance()->post();
-        var_dump($postData);
-        return;
+
         //实例化Teacher空对象
         $Teacher = new Teacher();
 
         //为对象属性赋值
-        $Teacher->name = '马六';
-        $Teacher->username = 'maliu';
-        $Teacher->sex = '1';
-        $Teacher->email = 'maliu@qq.com';
+        $Teacher->name = $postData['name'];
+        $Teacher->username = $postData['username'];
+        $Teacher->sex = $postData['sex'];
+        $Teacher->email = $postData['email'];
 
+        $Teacher->save();
         //执行对象的插入数据操作
-        var_dump($Teacher->save());
+        // var_dump($Teacher->save());
         return $Teacher->name . '成功增加到数据库。新增ID为：' . $Teacher->id;
 
     }
