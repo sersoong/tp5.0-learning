@@ -24,7 +24,6 @@ class TeacherController extends Controller
     {
         //接收传入数据
         $postData = Request::instance()->post();
-
         //实例化Teacher空对象
         $Teacher = new Teacher();
 
