@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
-
+use think\Request;
 use app\common\model\Teacher;
 
 class TeacherController extends Controller
@@ -22,6 +22,9 @@ class TeacherController extends Controller
 
     public function insert()
     {
+        $postData = Request::instance()->post();
+        var_dump($postData);
+        return;
         //实例化Teacher空对象
         $Teacher = new Teacher();
 
@@ -35,5 +38,11 @@ class TeacherController extends Controller
         var_dump($Teacher->save());
         return $Teacher->name . '成功增加到数据库。新增ID为：' . $Teacher->id;
 
+    }
+
+    public function add()
+    {
+        $htmls = $this->fetch();
+        return $htmls;
     }
 }
