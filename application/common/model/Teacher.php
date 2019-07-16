@@ -20,6 +20,13 @@ class Teacher extends Model
         return false;
     }
 
+    //处理注销操作
+    static public function logOut()
+    {
+        \session('teacherId',null);
+        return true;
+    }
+
     public function checkPassword($password)
     {
         if ($this->getData('password')===$this::encryptPassword($password)) {

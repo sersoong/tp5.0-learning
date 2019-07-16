@@ -35,9 +35,6 @@ class LoginController extends Controller
 
         //验证密码是否正确
         if (Teacher::login($postData['username'],$postData['password'])) {
-
-                //用户名密码正确，将teacherId 存Session
-                \session('teacherId',$Teacher->getData('id'));
                 return $this->success('login success',\url('Teacher/index'));
         } else {
 
@@ -45,5 +42,15 @@ class LoginController extends Controller
             return $this->error('username or password incorrect',\url('index'));
         }
 
+    }
+
+    //注销
+    public function logout()
+    {
+        if (Teacher::logOut()) {
+            return $this->success('logout success',url('index'));
+        } else {
+            return $this->error('logout failed');
+        }
     }
 }
