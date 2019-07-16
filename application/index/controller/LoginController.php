@@ -7,6 +7,12 @@ use app\common\model\Teacher;
 
 class LoginController extends Controller
 {
+    //测试函数
+    public function test()
+    {
+        echo(Teacher::encryptPassword('123'));
+    }
+
     //用户登录表单
     public function index()
     {
@@ -26,15 +32,17 @@ class LoginController extends Controller
         $map = array('username'=>$postData['username']);
         $Teacher = Teacher::get($map);
 
-        if (!is_null($Teacher) && $Teacher -> getData('password') === $postData['password']) {
+        //验证密码是否正确
+        if (Teacher::login($postData['username'],$postData['password'])) {
+
+                //用户名密码正确，将teacherId 存Session
                 \session('teacherId',$Teacher->getData('id'));
                 return $this->success('login success',\url('Teacher/index'));
         } else {
+
+            //用户名密码错误，跳转到登录界面
             return $this->error('username or password incorrect',\url('index'));
         }
-        //验证密码是否正确
-        //用户名密码正确，将teacherId 存Session
-        //用户名密码错误，跳转到登录界面
-        return 'login';
+
     }
 }
