@@ -44,4 +44,15 @@ class Teacher extends Model
 
         return sha1(\md5($password) . 'mengyunzhi');
     }
+
+    static public function isLogin()
+    {
+        $teacherId = \session('teacherId');
+
+        if (isset($teacherId)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

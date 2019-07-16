@@ -8,10 +8,24 @@ class TeacherController extends Controller
 {
     public function index()
     {
+        //验证用户是否登录
+        if (!Teacher::isLogin()) {
+            return $this->error('plz login first',url('login/index'));
+        }
+
+        $name = Request::instance()->get('name');
+
+        $pageSize=5; //每页显示5条数据
+
         //创建Teacher 实例
         $Teacher = new Teacher;
-        //查询所有Teacher数据
-        $teachers = $Teacher->select();
+
+        //// 按条件查询数据并调用分页
+        $teachers = $Teacher->where('name','like','%' . $name . '%')->paginate($pageSize,false,[
+            'query'=>[
+                'name' => $name,
+            ],
+        ]);
         //给模板变量teachers赋值
         $this->assign('teachers',$teachers);
         //加载模板
