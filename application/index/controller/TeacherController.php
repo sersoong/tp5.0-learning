@@ -6,13 +6,19 @@ use app\common\model\Teacher;
 
 class TeacherController extends Controller
 {
-    public function index()
+    public function __construct()
     {
+        //调用父类构造函数(必须)
+        parent::__construct();
+
         //验证用户是否登录
         if (!Teacher::isLogin()) {
             return $this->error('plz login first',url('login/index'));
         }
+    }
 
+    public function index()
+    {
         $name = Request::instance()->get('name');
 
         $pageSize=5; //每页显示5条数据
