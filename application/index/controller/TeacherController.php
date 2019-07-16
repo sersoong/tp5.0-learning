@@ -33,10 +33,18 @@ class TeacherController extends Controller
         $Teacher->sex = $postData['sex'];
         $Teacher->email = $postData['email'];
         $Teacher->create_time = date('Y-m-d H:i:s', time());
-        $Teacher->save();
-        //执行对象的插入数据操作
+
+        $result = $Teacher->validate(true)->save($Teacher->getData());
+
+        // $Teacher->save();
         // var_dump($Teacher->save());
-        return $Teacher->name . '成功增加到数据库。新增ID为：' . $Teacher->id;
+        // 反馈结果
+        if (false === $result)
+        {
+            return '新增失败:' . $Teacher->getError();
+        } else {
+            return  '新增成功。新增ID为:' . $Teacher->id;
+        }
 
     }
 
