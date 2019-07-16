@@ -43,14 +43,4 @@ class LoginController extends Controller
         }
 
     }
-
-    //注销
-    public function logout()
-    {
-        if (Teacher::logOut()) {
-            return $this->success('logout success',url('index'));
-        } else {
-            return $this->error('logout failed');
-        }
-    }
 }

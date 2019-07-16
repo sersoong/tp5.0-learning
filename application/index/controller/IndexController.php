@@ -22,4 +22,6 @@ class IndexController extends Controller
         // var_dump(Db::name('teacher')->find());
         // return 'helloworl';
     }
+
+    
 }
