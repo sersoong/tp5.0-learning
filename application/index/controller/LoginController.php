@@ -10,7 +10,8 @@ class LoginController extends Controller
     //测试函数
     public function test()
     {
-        echo(Teacher::encryptPassword('123'));
+        $hello = ['123'];
+        echo(Teacher::encryptPassword($hello));
     }
 
     //用户登录表单

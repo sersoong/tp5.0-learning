@@ -31,6 +31,10 @@ class Teacher extends Model
 
     static public function encryptPassword($password)
     {
+        if (!is_string($password)){
+            throw new \RuntimeException("传入变量类型非字符串，错误码2",2);
+        }
+
         return sha1(\md5($password) . 'mengyunzhi');
     }
 }
