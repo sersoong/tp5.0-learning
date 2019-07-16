@@ -1,22 +1,10 @@
 <?php
 namespace app\index\controller;
-use think\Controller;
-use think\Request;
-use app\common\model\Teacher;
+use think\Request;//请求
+use app\common\model\Teacher;//教师模型
 
-class TeacherController extends Controller
+class TeacherController extends IndexController
 {
-    public function __construct()
-    {
-        //调用父类构造函数(必须)
-        parent::__construct();
-
-        //验证用户是否登录
-        if (!Teacher::isLogin()) {
-            return $this->error('plz login first',url('login/index'));
-        }
-    }
-
     public function index()
     {
         $name = Request::instance()->get('name');
