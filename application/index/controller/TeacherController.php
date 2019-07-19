@@ -9,7 +9,7 @@ class TeacherController extends IndexController
     {
         $name = Request::instance()->get('name');
 
-        $pageSize=5; //每页显示5条数据
+        $pageSize=30; //每页显示5条数据
 
         //创建Teacher 实例
         $Teacher = new Teacher;
@@ -60,6 +60,20 @@ class TeacherController extends IndexController
     {
         $htmls = $this->fetch();
         return $htmls;
+    }
+
+    public function delete()
+    {
+        //获取要删除的对象
+        $Teacher = Teacher::get(16);
+    
+        //删除对象
+        if(is_null($Teacher)) {
+            return $this->error('找不到该教师的ID：'. $Teacher->getError(),url('index'));
+        } else {
+            $Teacher->delete();
+            return $this->success('删除成功',url('index'));
+        }
     }
 
     public function test()

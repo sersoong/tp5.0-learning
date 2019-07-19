@@ -18,7 +18,7 @@
                 </tr>
                 {volist name="teachers" id="teacher" key="key"}
                 <tr>
-                    <td>{$key}</td>
+                    <td>{$teacher->getData('id')}</td>
                     <td>{$teacher->getData('name')}</td>
                     <td>{eq name='teacher->getData("sex")' value='0'}男{else /}女{/eq}</td>
                     <td>{$teacher->getData('email')}</td>
@@ -26,6 +26,7 @@
                 </tr>
                 {/volist}
             </table>
+            {$teachers->render()}
         </div>
     </div>
     
