@@ -86,6 +86,10 @@ class TeacherController extends IndexController
         return $this->success('删除成功',url('index'));
     }
 
+    public function edit()
+    {
+        var_dump(Request::instance()->param());
+    }
     public function test()
     {
         $data = array();
