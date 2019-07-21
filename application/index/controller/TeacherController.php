@@ -8,7 +8,7 @@ class TeacherController extends IndexController
     public function index()
     {
         $name = Request::instance()->get('name');
-        echo($name);
+        // echo($name);
 
         $pageSize=30; //每页显示30条数据
 

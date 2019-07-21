@@ -35,7 +35,7 @@
                 </tr>
                 {volist name="klasses" id="klass" key="key"}
                 <tr>
-                    <td>{$key}</td>
+                    <td>{$klass->getData('id')}</td>
                     <td>{$klass->getData('name')}</td>
                     <td>
                         {$klass->getTeacher()->getData('name')}

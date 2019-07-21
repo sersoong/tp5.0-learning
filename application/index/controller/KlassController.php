@@ -78,7 +78,17 @@ class KlassController extends IndexController
 
     public function delete()
     {
+        //获取传入id
         $id = Request::instance()->param('id/d');
-        var_dump($id);
+        
+        //获取id对应的班级对象
+        $klass = Klass::get($id);
+
+        //删除对象
+        if($klass->delete()){
+            $this->success('删除成功',url('index'));
+        } else {
+            $this->error('删除失败 ' . $klass->getError(),url('index'));
+        }
     }
 }
