@@ -105,6 +105,26 @@ class TeacherController extends IndexController
         // 将封装好的V层内容返回给用户
         return $htmls;
     }
+
+    public function update()
+    {
+        // 接收数据
+        $teacher = Request::instance()->post();
+
+        // 将数据存入Teacher表
+        $Teacher = new Teacher();
+        $state = $Teacher->validate(true)->isUpdate(true)->save($teacher);
+
+        // 依据状态定制提示信息
+        var_dump($state);
+        // 依据状态定制提示信息
+        if ($state) {
+            return '更新成功';
+        } else {
+            return '更新失败';
+        }
+    }
+
     public function test()
     {
         $data = array();
