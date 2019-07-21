@@ -93,7 +93,7 @@ class TeacherController extends IndexController
 
         // 在Teacher表模型中获取当前记录
         if (is_null($Teacher = Teacher::get($id))) {
-            return '系统未找到ID为' . $id . '的记录';
+            $this->error('系统未找到ID为' . $id . '的记录',url('index'));
         } 
         
         // 将数据传给V层
@@ -108,21 +108,30 @@ class TeacherController extends IndexController
 
     public function update()
     {
-        // 接收数据
-        $teacher = Request::instance()->post();
+            // 接收数据，获取要更新的关键字信息
+            $id = Request::instance()->post('id/d');
 
-        // 将数据存入Teacher表
-        $Teacher = new Teacher();
-        $state = $Teacher->validate(true)->isUpdate(true)->save($teacher);
+            // 获取当前对象
+            $Teacher = Teacher::get($id);
 
-        // 依据状态定制提示信息
-        var_dump($state);
-        // 依据状态定制提示信息
-        if ($state) {
-            return '更新成功';
-        } else {
-            return '更新失败';
-        }
+            if (!is_null($Teacher)) {
+                // 写入要更新的数据
+                $Teacher->name = Request::instance()->post('name');
+                $Teacher->username = Request::instance()->post('username');
+                $Teacher->sex = Request::instance()->post('sex/d');
+                $Teacher->email = Request::instance()->post('email');
+
+                // 更新
+                if (false === $Teacher->validate(true)->save())
+                {
+
+                    $this->error('更新失败' . $Teacher->getError(),url('index'));
+                } else {
+                    $this->success('更新成功',url('index'));
+                }
+            } else {
+                $this->error('所更新的记录不存在',url('index'));
+            }
     }
 
     public function test()
