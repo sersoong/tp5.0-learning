@@ -64,19 +64,26 @@ class TeacherController extends IndexController
 
     public function delete()
     {
-        var_dump(Request::instance()->param());
-        return;
+        //获取传入的id值
+        $id = Request::instance()->param('id/d');
+        
+        if(is_null($id) || 0===$id) {
+            $this->error('未获取到ID信息');
+        }
 
         //获取要删除的对象
-        $Teacher = Teacher::get(16);
+        $Teacher = Teacher::get($id);
     
         //删除对象
         if(is_null($Teacher)) {
             return $this->error('找不到该教师的ID：'. $Teacher->getError(),url('index'));
-        } else {
-            $Teacher->delete();
-            return $this->success('删除成功',url('index'));
+        } 
+
+        if (!$Teacher->delete()){
+            return $this->error('删除失败:' . $Teacher->getError());
         }
+
+        return $this->success('删除成功',url('index'));
     }
 
     public function test()
