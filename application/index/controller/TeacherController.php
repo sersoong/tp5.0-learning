@@ -8,8 +8,9 @@ class TeacherController extends IndexController
     public function index()
     {
         $name = Request::instance()->get('name');
+        echo($name);
 
-        $pageSize=30; //每页显示5条数据
+        $pageSize=30; //每页显示30条数据
 
         //创建Teacher 实例
         $Teacher = new Teacher;
@@ -32,6 +33,7 @@ class TeacherController extends IndexController
     {
         //接收传入数据
         $postData = Request::instance()->post();
+
         //实例化Teacher空对象
         $Teacher = new Teacher();
 
@@ -44,16 +46,13 @@ class TeacherController extends IndexController
 
         $result = $Teacher->validate(true)->save($Teacher->getData());
 
-        // $Teacher->save();
-        // var_dump($Teacher->save());
         // 反馈结果
         if (false === $result)
         {
-            return '新增失败:' . $Teacher->getError();
+            $this->error('新增失败:' . $Teacher->getError(),url('index'));
         } else {
-            return  '新增成功。新增ID为:' . $Teacher->id;
+            $this->success('新增成功。新增ID为:' . $Teacher->id,url('index'));
         }
-
     }
 
     public function add()
@@ -68,7 +67,7 @@ class TeacherController extends IndexController
         $id = Request::instance()->param('id/d');
         
         if(is_null($id) || 0===$id) {
-            $this->error('未获取到ID信息');
+            $this->error('未获取到ID信息',url('index'));
         }
 
         //获取要删除的对象

@@ -6,14 +6,15 @@
     <title>新增数据</title>
 </head>
 
-<body class="container">
+<body class="contanier">
     <div class="row">
         <div class="col-md-12">
-            <form action="insert" method="post">
+            <form action="{:url('insert')}" method="post">
                 <label>姓名:</label>
                 <input type="text" name="name" />
                 <label>用户名:</label>
                 <input type="text" name="username" />
+                <input type="hidden" name="password" value="123"/>
                 <label>性别:</label>
                 <select name="sex">
                     <option value="0">男</option>
