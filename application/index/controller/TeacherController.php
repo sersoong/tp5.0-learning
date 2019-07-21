@@ -64,6 +64,9 @@ class TeacherController extends IndexController
 
     public function delete()
     {
+        var_dump(Request::instance()->param());
+        return;
+
         //获取要删除的对象
         $Teacher = Teacher::get(16);
     
