@@ -14,4 +14,10 @@ class Student extends Model
             return $status[0];
         }
     }
+
+    public function getCreateTimeAttr($value)
+    {
+        return $value;
+        // return date('Y-m-d',$value);
+    }
 }
