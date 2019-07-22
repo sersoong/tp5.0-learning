@@ -18,6 +18,10 @@ class Student extends Model
     public function getCreateTimeAttr($value)
     {
         return $value;
-        // return date('Y-m-d',$value);
+    }
+
+    public function klass()
+    {
+        return $this->belongsTo('Klass');
     }
 }
