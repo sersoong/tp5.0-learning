@@ -29,4 +29,10 @@ class Course extends Model
         }
         //有记录，返回true;没记录，返回false
     }
+
+    public function KlassCourses()
+    {
+        return $this->hasMany('KlassCourse');
+    }
+
 }

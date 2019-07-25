@@ -33,24 +33,24 @@
                     <th>班级</th>
                     <th>操作</th>
                 </tr>
-                {volist name="courses" id="course" key="key"}
+                {volist name="array_course" id="course" key="key"}
                 <tr>
-                    <td>{$course->getData('id')}</td>
-                    <td>{$course->getData('name')}</td>
+                    <td>{$course['id']}</td>
+                    <td>{$course['name']}</td>
                     <td>
-                        
+                        {$course['klassIds']}
                     </td>
                     <td>
                         <a 
                         class="btn btn-danger btn-sm" 
-                        href="{:url('delete?id=' . $course->getData('id'))}"
+                        href="{:url('delete?id=' . $course['id'])}"
                         >
                             <i class="glyphicon glyphicon-trash"></i>
                                 &nbsp;删除
                         </a>
                             &nbsp;<a 
                             class="btn btn-sm btn-primary" 
-                            href="{:url('edit?id=' . $course->getData('id'))}"
+                            href="{:url('edit?id=' . $course['id'])}"
                             >
                             <i class="glyphicon glyphicon-pencil"></i>
                             &nbsp;编辑</a>
@@ -58,7 +58,7 @@
                 </tr>
                 {/volist}
             </table>
-            {$courses->render()}
+            
         </div>
     </div>
 </body>
