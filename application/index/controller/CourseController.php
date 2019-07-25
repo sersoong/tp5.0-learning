@@ -40,6 +40,8 @@ class CourseController extends IndexController
 
     public function save()
     {
+        // var_dump(Request::instance()->post());
+        // return;
         $Course = new Course();
         $Course->name = Request::instance()->post('name');
 
