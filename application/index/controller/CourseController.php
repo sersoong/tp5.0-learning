@@ -39,23 +39,8 @@ class CourseController extends IndexController
 
         //利用klass_id数组，拼接为包括klass_id和course_id的二维数组
         if (!is_null($klassIds)) {
-            $datas = array();
-            foreach ($klassIds as $klassId) {
-                $data = array();
-                $data['klass_id'] = $klassId;
-                $data['course_id'] = $Course->id;
-
-                array_push($datas,$data);
-            }
-
-            //利用saveAll()方法，来将二维数据存入数据库
-            if (!empty($datas)) {
-                $KlassCourse = new KlassCourse;
-                if (!$KlassCourse->validate(true)->saveAll($datas)) {
-                    return $this->error('课程-班级信息保存错误：' . $KlassCourse->getError());
-                }
-
-                unset($KlassCourse);
+            if (!$Course->Klasses()->saveAll($klassIds)) {
+                return $this->error('课程-班级信息保存错误：' . $Course->Klasses()->getError());
             }
         }
 
