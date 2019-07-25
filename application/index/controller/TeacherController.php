@@ -57,7 +57,16 @@ class TeacherController extends IndexController
 
     public function add()
     {
-        $htmls = $this->fetch();
+        $Teacher = new Teacher();
+
+        $Teacher->id = 0;
+        $Teacher->name = '';
+        $Teacher->username = '';
+        $Teacher->sex = 0;
+        $Teacher->email = '';
+
+        $this->assign('Teacher',$Teacher);
+        $htmls = $this->fetch('edit');
         return $htmls;
     }
 
