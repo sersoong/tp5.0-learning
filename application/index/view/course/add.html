@@ -12,7 +12,7 @@
             <form action="{:url('save')}" method="post">
                 <label>名称:</label>
                 <input type="text" name="name" />
-                {volist name="klasses" id="klass"}
+                {volist name="Course->Klasses()->select()" id="klass"}
                 <input type="checkbox" name="klass_id[]" id="klass_id_{$klass->id}" value="{$klass->id}" />
                 <label for="klass_id_{$klass->id}">{$klass->name}</label>
                 {/volist}
