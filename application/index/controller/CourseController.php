@@ -15,12 +15,16 @@ class CourseController extends IndexController
         foreach ($Course as $key =>$course) {
             $courses['id'] = $course->getData('id');
             $courses['name'] = $course->getData('name');
-            
             $klassIds = $course->KlassCourses()->where('course_id',$courses['id'])->column('klass_id');
-            $courses['klassIds'] = implode(",",$klassIds);
+            $course_names = array();
+            foreach ($klassIds as $key =>$klassid) {
+                $course_name_array = $course->Klasses()->where('id',$klassid)->column('name');
+                array_push($course_names,\implode('',$course_name_array)) ;
+            }
+            $courses['klass_names']=implode(',',$course_names);
             array_push($array_course,$courses);
         }
-        var_dump($array_course);
+        // var_dump($array_course);
         // {$klasscourse->render()}
         //赋予变量到模板
         $this->assign('array_course',$array_course);
