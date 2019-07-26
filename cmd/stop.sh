@@ -1,5 +1,5 @@
-ID=`ps -ef | grep dbeaver`
-for id in ID
+ID=`ps -ef | grep dbeaver | grep -v "grep"`
+for id in $ID
 do
 kill -9 $id
 done
