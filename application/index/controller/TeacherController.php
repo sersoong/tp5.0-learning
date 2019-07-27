@@ -37,14 +37,9 @@ class TeacherController extends IndexController
         //实例化Teacher空对象
         $Teacher = new Teacher();
 
-        //为对象属性赋值
-        $Teacher->name = $postData['name'];
-        $Teacher->username = $postData['username'];
-        $Teacher->sex = $postData['sex'];
-        $Teacher->email = $postData['email'];
-        $Teacher->create_time = date('Y-m-d H:i:s', time());
+        // $Teacher->create_time = date('Y-m-d H:i:s', time());
 
-        $result = $Teacher->validate(true)->save($Teacher->getData());
+        $result = $this->saveTeachers($Teacher);
 
         // 反馈结果
         if (false === $result)
@@ -123,14 +118,9 @@ class TeacherController extends IndexController
             $Teacher = Teacher::get($id);
 
             if (!is_null($Teacher)) {
-                // 写入要更新的数据
-                $Teacher->name = Request::instance()->post('name');
-                $Teacher->username = Request::instance()->post('username');
-                $Teacher->sex = Request::instance()->post('sex/d');
-                $Teacher->email = Request::instance()->post('email');
 
                 // 更新
-                if (false === $Teacher->validate(true)->save())
+                if (false === $this->saveTeachers($Teacher,true))
                 {
 
                     $this->error('更新失败' . $Teacher->getError(),url('index'));
@@ -140,6 +130,20 @@ class TeacherController extends IndexController
             } else {
                 $this->error('所更新的记录不存在',url('index'));
             }
+    }
+
+    private function saveTeachers(Teacher &$Teacher,$isUpdate = false)
+    {
+        $Teacher->name = Request::instance()->post('name');
+
+        if(!$isUpdate){
+            $Teacher->username = Request::instance()->post('username');
+        }
+
+        $Teacher->sex = Request::instance()->post('sex/d');
+        $Teacher->email = Request::instance()->post('email');
+
+        return $Teacher->validate(true)->save();
     }
 
     public function test()
