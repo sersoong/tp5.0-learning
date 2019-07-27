@@ -8,11 +8,13 @@ class StudentController extends IndexController
 {
     public function index()
     {
+        $this->setName('student');
         //读取数据
         $students = Student::paginate();
 
         //显示数据
         $this->assign('students',$students);
+        $this->assign('controller_name',$this->getName());
         return $this->fetch();
     }
 

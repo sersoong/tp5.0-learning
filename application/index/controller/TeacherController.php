@@ -7,9 +7,9 @@ class TeacherController extends IndexController
 {
     public function index()
     {
+        $this->setName('teacher');
         $name = Request::instance()->get('name');
         // echo($name);
-
         $pageSize=30; //每页显示30条数据
 
         //创建Teacher 实例
@@ -23,6 +23,7 @@ class TeacherController extends IndexController
         ]);
         //给模板变量teachers赋值
         $this->assign('teachers',$teachers);
+        $this->assign('controller_name',$this->getName());
         //加载模板
         $htmls = $this->fetch();
         //返回数据
@@ -31,9 +32,6 @@ class TeacherController extends IndexController
 
     public function insert()
     {
-        //接收传入数据
-        $postData = Request::instance()->post();
-
         //实例化Teacher空对象
         $Teacher = new Teacher();
 

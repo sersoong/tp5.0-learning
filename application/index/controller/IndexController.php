@@ -6,6 +6,9 @@ use app\common\model\Teacher;
 
 class IndexController extends Controller
 {
+
+    protected $name='';
+
     public function __construct()
     {
         // 调用父类构造函数(必须)
@@ -23,5 +26,13 @@ class IndexController extends Controller
         // return 'helloworl';
     }
 
-    
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($value)
+    {
+        $this->name = $value;
+    }
 }

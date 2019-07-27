@@ -8,8 +8,10 @@ class KlassController extends IndexController
 {
     public function index()
     {
+        $this->setName('klass');
         $Klasses = Klass::paginate();
         $this->assign('klasses',$Klasses);
+        $this->assign('controller_name',$this->getName());
         return $this->fetch();
     }
 

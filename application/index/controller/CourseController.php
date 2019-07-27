@@ -9,6 +9,7 @@ class CourseController extends IndexController
 {
     public function index()
     {
+        $this->setName('course');
         //取出数据库课程
         $Course = Course::all();
         $array_course = array();
@@ -28,6 +29,7 @@ class CourseController extends IndexController
         // {$klasscourse->render()}
         //赋予变量到模板
         $this->assign('array_course',$array_course);
+        $this->assign('controller_name',$this->getName());
         return $this->fetch();
     }
 
