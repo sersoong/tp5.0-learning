@@ -30,16 +30,20 @@ class LoginController extends Controller
         $postData = Request::instance()->post();
         
         //验证用户名是否存在
-        $map = array('username'=>$postData['username']);
-        $Teacher = Teacher::get($map);
+        if(!empty($postData)){
+            $map = array('username'=>$postData['username']);
+            $Teacher = Teacher::get($map);
 
-        //验证密码是否正确
-        if (Teacher::login($postData['username'],$postData['password'])) {
-                return $this->success('login success',\url('Teacher/index'));
+            //验证密码是否正确
+            if (Teacher::login($postData['username'],$postData['password'])) {
+                    return $this->success('login success',\url('Teacher/index'));
+            } else {
+
+                //用户名密码错误，跳转到登录界面
+                return $this->error('username or password incorrect',\url('index'));
+            }
         } else {
-
-            //用户名密码错误，跳转到登录界面
-            return $this->error('username or password incorrect',\url('index'));
+            $this->error('非法提交',url('index'));
         }
 
     }
